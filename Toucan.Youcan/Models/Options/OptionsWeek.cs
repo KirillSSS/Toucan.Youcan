@@ -25,9 +25,9 @@ namespace Toucan.Youcan.Models.Options
                     result.Add(temp);
 
                 if (temp.DayOfWeek == DayOfWeek.Sunday)
-                    temp.AddDays((Frequency - 1) * 7);
+                    temp = temp.AddDays((Frequency - 1) * 7);
 
-                temp.AddDays(1);
+                temp = temp.AddDays(1);
             }
 
             return result;

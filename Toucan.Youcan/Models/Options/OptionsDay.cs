@@ -21,7 +21,7 @@ namespace Toucan.Youcan.Models
             while (temp <= end)
             { 
                 result.Add(temp);
-                temp.AddDays(Frequency);
+                temp = temp.AddDays(Frequency);
             }
 
             return result;
