@@ -1,5 +1,4 @@
 ﻿using Toucan.Youcan.Models.Abstractions;
-using Toucan.Youcan.Models.Enums;
 
 namespace Toucan.Youcan.Models
 {
