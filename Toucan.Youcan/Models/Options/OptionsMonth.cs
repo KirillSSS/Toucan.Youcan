@@ -21,8 +21,8 @@ namespace Toucan.Youcan.Models.Options
             if (StartDate >= start)
                 start = StartDate;
 
-            if (EndDate <= end)
-                end = EndDate;
+            if (EndDate != null && EndDate <= end)
+                end = (DateTime)EndDate;
 
             var temp = start;
 

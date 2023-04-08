@@ -6,7 +6,7 @@
 
         public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         public List<DateTime> GetAllDays(DateTime startDate, DateTime endDate);
     }
