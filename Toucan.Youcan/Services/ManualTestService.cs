@@ -6,6 +6,11 @@ namespace Toucan.Youcan.Services
 {
     public class ManualTestService : ITestService
     {
+        public string GetDate(int days)
+        {
+            return DateTime.Now.AddDays(days) + "";
+        }
+
         public string testDays(DateTime startDate, int frequency, DateTime start, DateTime end)
         {
             var option = new OptionsDay();
@@ -52,21 +57,27 @@ namespace Toucan.Youcan.Services
             return string.Join(", ", option.GetAllDays(start, end));
         }
 
-        public string testYears(DateTime startDate, int frequency, DateTime start, DateTime end, HashSet<DayOfWeek> days)
+        public string testYears(DateTime startDate, DateTime start, DateTime end, int? dayNumber, MonthEnum? monthFirst, WeekEnum? weekNumber, DayOfWeek? day, MonthEnum? monthSecond, bool isExtendedMode)
         {
-            var option = new OptionsWeek();
+            var option = new OptionsYear();
 
             option.StartDate = startDate;
             option.EndDate = startDate.AddYears(2);
-            option.Frequency = frequency;
-            option.Days = days;
+            option.IsExtendedMode |= isExtendedMode;
+
+            if (isExtendedMode)
+            {
+                option.WeekNumber = weekNumber;
+                option.Day = day;
+                option.MonthSecond = monthSecond;
+            }
+            else
+            {
+                option.DayNumber = dayNumber;
+                option.MonthFirst = monthFirst;
+            }
 
             return string.Join(", ", option.GetAllDays(start, end));
-        }
-
-        public string GetDate(int days)
-        {
-            return DateTime.Now.AddDays(days) + "";
         }
     }
 }
