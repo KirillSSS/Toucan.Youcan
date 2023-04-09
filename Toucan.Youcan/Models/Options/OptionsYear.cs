@@ -60,7 +60,7 @@ namespace Toucan.Youcan.Models.Options
                     if (WeekNumber == WeekEnum.Last)
                         result.Add(daysofweek[daysofweek.Count - 1]);
                     else
-                        result.Add(daysofweek[(int)WeekNumber]);
+                        result.Add(daysofweek[(int)WeekNumber - 1]);
 
                     temp = temp.AddYears(1);
                 }
