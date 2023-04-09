@@ -15,7 +15,7 @@ namespace Toucan.Youcan.Models.Options
 
         public MonthEnum? MonthSecond { get; set; }
 
-        public bool IsSecondMode { get; set; }
+        public bool IsExtendedMode { get; set; }
 
         override public List<DateTime> GetAllDays(DateTime start, DateTime end)
         {
@@ -29,7 +29,7 @@ namespace Toucan.Youcan.Models.Options
 
 
 
-            if (!IsSecondMode)
+            if (!IsExtendedMode)
             {
                 var temp = new DateTime(start.Year - 1, (int)MonthFirst, (int)DayNumber);
 

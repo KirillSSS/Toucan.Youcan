@@ -13,6 +13,12 @@ namespace Toucan.Youcan.Controllers
             _manualTestService = manualTestService;
         }
 
+        [HttpGet("getdate")]
+        public string GetDate(int days)
+        {
+            return _manualTestService.GetDate(days);
+        }
+
         [HttpGet("testdays")]
         public string TestDays(string startDate, int frequency, string start, string end)
         {
@@ -50,10 +56,39 @@ namespace Toucan.Youcan.Controllers
             return _manualTestService.testMonths(sD, frequency, s, e, dayNumber, dayOfWeek, weekFrequency, isExtendedMode);
         }
 
-        [HttpGet("getdate")]
-        public string GetDate(int days)
+        [HttpGet("testyears")]
+        public string TestYears(string startDate, string start, string end, int? dayNumber, int? monthFirst, int? weekNumber, string? day, int? monthSecond, bool isExtendedMode)
         {
-            return _manualTestService.GetDate(days);
-        }   
+            DateTime.TryParse(startDate, out var sD);
+            DateTime.TryParse(start, out var s);
+            DateTime.TryParse(end, out var e);
+
+            DayOfWeek? dayOfWeek;
+            MonthEnum? mF;
+            WeekEnum? wN;
+            MonthEnum? mS;
+
+            if (day != null)
+                dayOfWeek = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), day);
+            else
+                dayOfWeek = null;
+
+            if (monthFirst != null)
+                mF = (MonthEnum)monthFirst;
+            else
+                mF = null;
+
+            if (weekNumber != null)
+                wN = (WeekEnum)weekNumber;
+            else
+                wN = null;
+
+            if (monthSecond != null)
+                mS = (MonthEnum)monthSecond;
+            else
+                mS = null;
+
+            return _manualTestService.testYears(sD, s, e, dayNumber, mF, wN, dayOfWeek, mS, isExtendedMode);
+        }
     }
 }
