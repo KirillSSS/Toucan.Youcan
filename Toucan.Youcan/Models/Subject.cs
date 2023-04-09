@@ -1,6 +1,5 @@
 ﻿using Toucan.Youcan.Models.Abstractions;
 
-
 namespace Toucan.Youcan.Models
 {
     public class Subject : Category

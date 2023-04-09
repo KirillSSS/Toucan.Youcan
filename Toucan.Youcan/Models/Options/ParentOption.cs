@@ -8,7 +8,7 @@ namespace Toucan.Youcan.Models.Options
 
         public DateTime StartDate { get; set; }
 
-        public DateTime EndDate { get; set; } = DateTime.Now.AddYears(5);
+        public DateTime? EndDate { get; set; }
 
         virtual public List<DateTime> GetAllDays(DateTime start, DateTime end)
         {
