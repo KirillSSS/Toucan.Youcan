@@ -1,16 +1,11 @@
-﻿using Toucan.Youcan.Models;
-using Toucan.Youcan.Models.Options;
+﻿using Toucan.Youcan.Models.Options;
+using Toucan.Youcan.Models;
 using Toucan.Youcan.Services.Abstractions;
 
 namespace Toucan.Youcan.Services
 {
-    public class UserService : IUserService
+    public class ManualTestService : ITestService
     {
-        public User GetUser(UserLogin user)
-        {
-            throw new NotImplementedException();
-        }
-
         public string testDays(DateTime startDate, int frequency, DateTime start, DateTime end)
         {
             var option = new OptionsDay();
@@ -20,7 +15,7 @@ namespace Toucan.Youcan.Services
 
             option.Frequency = frequency;
 
-            return string.Join(", ", option.GetAllDays(start, end)); 
+            return string.Join(", ", option.GetAllDays(start, end));
         }
 
         public string testWeeks(DateTime startDate, int frequency, DateTime start, DateTime end, HashSet<DayOfWeek> days)

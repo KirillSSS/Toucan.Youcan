@@ -4,7 +4,7 @@ namespace Toucan.Youcan.Models
 {
     public class BaseEntity : IEntity
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
     }
