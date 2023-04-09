@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using System.Text.Json;
 using Toucan.Youcan.DTOs;
 using Toucan.Youcan.Services;
 using Toucan.Youcan.Services.Abstractions;
@@ -9,7 +11,7 @@ using Toucan.Youcan.Services.Abstractions;
 
 namespace Toucan.Youcan.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("user/[controller]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
@@ -20,22 +22,55 @@ namespace Toucan.Youcan.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpGet("signin/{login}/{hashedPassword}")]
-        public string SignIn(/*SignInDTO user*/string login, string hashedPassword)
-        {
-            var user = new SignDTO(login, hashedPassword);
+        //[HttpGet("signIn")]
+        //public string SignIn(/*SignInDTO user*/string login, string hashedPassword)
+        //{
+        //    var user = new SignDTO(login, hashedPassword);
 
+        //    try
+        //    {
+        //        return _authenticationService.SignIn(user) + "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.Message;
+        //    }
+        //}
+        [HttpGet("signIn")]
+        public string SignIn(string email, string password)
+        {
+            var user = new SignInDTO();
+            user.email = email;
+            user.password = password;
             try
             {
-                return _authenticationService.SignIn(user) + "";
+                return JsonSerializer.Serialize(_authenticationService.SignInNew(user));
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                var ret = new SignOutDTO();
+                ret.message = ex.Message;
+                return JsonSerializer.Serialize(ret);
             }
         }
 
-        [HttpGet("signup/{login}/{hashedPassword}")]
+
+
+        //POSHEL NAHER!)
+
+        [HttpGet("test")]
+        public string Test(Some model)
+        {
+            return "hello world";
+        }
+
+        public class Some
+        {
+            public int Email { get; set; }
+            public int Password { get; set; }
+        }
+
+        [HttpGet("signUp")]
         public string SignUp(/*SignInDTO user*/string login, string hashedPassword)
         {
             var user = new SignDTO(login, hashedPassword);

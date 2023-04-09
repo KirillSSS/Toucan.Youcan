@@ -1,18 +1,50 @@
 ﻿using Toucan.Youcan.DTOs;
 using Toucan.Youcan.Models;
 using Toucan.Youcan.Models.Options;
+using Toucan.Youcan.Data;
+using Toucan.Youcan.Data.Entities;
+using Toucan.Youcan.Data.Repositories;
+using Toucan.Youcan.Data.Abstraction;
 using Toucan.Youcan.Services.Abstractions;
 
 namespace Toucan.Youcan.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
+        private IUsersRepository _userRepository;
+        public AuthenticationService(IUsersRepository usersRepository)
+        {
+            _userRepository = usersRepository;
+        }
         public int SignIn(SignDTO user)
         {
             if (user == null || !CheckUser(user.Login, user.Password, out var ID))
                 throw new ArgumentException("No such user");
             else
                 return ID;
+        }
+        public SignOutDTO SignInNew(SignInDTO user)
+        {
+            var userOut = _userRepository.GetByMail(user.email);
+            var signOut = new SignOutDTO();
+            if (userOut == null)
+            {
+                signOut.message = "No such user";
+                return signOut;
+            }
+            else if (userOut.password.Equals(user.password))
+            {
+                signOut.message = "Success";
+                signOut.user = new UserDTO();
+                signOut.user.email = user.email;
+                signOut.user.id = userOut.id.ToString();
+                return signOut;
+            }
+            else
+            {
+                signOut.message = "Incorrect password";
+                return signOut;
+            }
         }
 
         public int SignUp(SignDTO user)
