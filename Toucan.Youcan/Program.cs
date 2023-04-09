@@ -20,7 +20,20 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IAdminsRepositrory, Admins_Repository>();
+builder.Services.AddScoped<ICategoryRepositrory, CategoryRepository>();
+builder.Services.AddScoped<IDaysRepositrory, DaysRepository>();
+builder.Services.AddScoped<IGroupRepositrory, GroupRepository>();
+builder.Services.AddScoped<IGroup_DaysRepositrory, Group_DaysRepository>();
+builder.Services.AddScoped<IMonthRepositrory, MonthRepository>();
+builder.Services.AddScoped<IOnce_Month_NumberRepositrory, Once_Month_NumberRepository>();
+builder.Services.AddScoped<IOnce_Year_Month_NumberRepositrory, Once_Year_Number_MonthRepository>();
+builder.Services.AddScoped<IRepeat_first_dayRepositrory, Repeat_first_dayRepository>();
+builder.Services.AddScoped<IType_repeatRepositrory, Type_RepeatRepository>();
+builder.Services.AddScoped<IUser_Category_subscribeRepositrory, User_Category_SubscribeRepository>();
+builder.Services.AddScoped<IUser_GroupsRepositrory, Users_GroupsRepository>();
 builder.Services.AddScoped<IUsersRepository, UserRepository>();
+
 builder.Services.AddScoped<ITestService, ManualTestService>();
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 

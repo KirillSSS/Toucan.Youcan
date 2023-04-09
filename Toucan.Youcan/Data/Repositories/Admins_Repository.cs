@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class Admins_Repository
+    public class Admins_Repository : IAdminsRepositrory
     {
         private readonly DataContext _context;
 

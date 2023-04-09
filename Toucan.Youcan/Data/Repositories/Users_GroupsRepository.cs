@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class Users_GroupsRepository
+    public class Users_GroupsRepository : IUser_GroupsRepositrory
     {
         private readonly DataContext _context;
 

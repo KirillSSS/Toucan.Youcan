@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class Once_Month_NumberRepository
+    public class Once_Month_NumberRepository : IOnce_Month_NumberRepositrory
     {
         private readonly DataContext _context;
 

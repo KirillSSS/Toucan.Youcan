@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class Group_DaysRepository
+    public class Group_DaysRepository : IGroup_DaysRepositrory
     {
         private readonly DataContext _context;
 

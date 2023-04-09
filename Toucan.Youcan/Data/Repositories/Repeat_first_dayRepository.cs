@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class Repeat_first_dayRepository
+    public class Repeat_first_dayRepository : IRepeat_first_dayRepositrory
     {
         private readonly DataContext _context;
 

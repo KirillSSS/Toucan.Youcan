@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class User_Category_SubscribeRepository
+    public class User_Category_SubscribeRepository : IUser_Category_subscribeRepositrory
     {
         private readonly DataContext _context;
 

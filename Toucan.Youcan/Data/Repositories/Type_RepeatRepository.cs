@@ -1,8 +1,9 @@
-﻿using Toucan.Youcan.Data.Entities;
+﻿using Toucan.Youcan.Data.Abstraction;
+using Toucan.Youcan.Data.Entities;
 
 namespace Toucan.Youcan.Data.Repositories
 {
-    public class Type_RepeatRepository
+    public class Type_RepeatRepository : IType_repeatRepositrory
     {
         private readonly DataContext _context;
 
