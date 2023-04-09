@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Toucan.Youcan.Models;
 using Toucan.Youcan.Services.Abstractions;
 
 namespace Toucan.Youcan.Controllers
@@ -12,8 +13,8 @@ namespace Toucan.Youcan.Controllers
             _manualTestService = manualTestService;
         }
 
-        [HttpGet("testdays/{startDate}/{frequency}/{start}/{end}")]
-        public string Test(string startDate, int frequency, string start, string end)
+        [HttpGet("testdays")]
+        public string TestDays(string startDate, int frequency, string start, string end)
         {
             DateTime.TryParse(startDate, out var sD);
             DateTime.TryParse(start, out var s);
@@ -22,7 +23,7 @@ namespace Toucan.Youcan.Controllers
             return _manualTestService.testDays(sD, frequency, s, e);
         }
 
-        [HttpGet("testweeks/{startDate}/{frequency}/{start}/{end}/{days}")]
+        [HttpGet("testweeks")]
         public string TestWeeks(string startDate, int frequency, string start, string end, string days)
         {
             DateTime.TryParse(startDate, out var sD);
@@ -30,6 +31,23 @@ namespace Toucan.Youcan.Controllers
             DateTime.TryParse(end, out var e);
 
             return _manualTestService.testWeeks(sD, frequency, s, e, days.Split(',').Select(day => Enum.Parse<DayOfWeek>(day)).ToHashSet());
+        }
+
+        [HttpGet("testmonths")]
+        public string TestMonths(string startDate, int frequency, string start, string end, int? dayNumber, string? day, int? weekFrequency, bool isExtendedMode)
+        {
+            DateTime.TryParse(startDate, out var sD);
+            DateTime.TryParse(start, out var s);
+            DateTime.TryParse(end, out var e);
+
+            DayOfWeek? dayOfWeek;
+
+            if (day != null)
+                dayOfWeek = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), day);
+            else
+                dayOfWeek = null;
+
+            return _manualTestService.testMonths(sD, frequency, s, e, dayNumber, dayOfWeek, weekFrequency, isExtendedMode);
         }
 
         [HttpGet("getdate")]

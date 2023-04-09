@@ -8,9 +8,9 @@ namespace Toucan.Youcan.Models.Options
     {
         public int? DayNumber { get; set; }
 
-        public DayOfWeek Day { get; set; }
+        public DayOfWeek? Day { get; set; }
 
-        public int WeekFrequency { get; set; }
+        public int WeekFrequency { get; set; } = 1;
 
         public bool IsExtendedMode { get; set; }
 
@@ -26,12 +26,12 @@ namespace Toucan.Youcan.Models.Options
 
             var temp = start;
 
-            if (IsExtendedMode)
+            if (IsExtendedMode && Day != null )
             {
                 while (temp <= end)
                 {
                     DateTime firstDayOfMonth = new DateTime(temp.Year, temp.Month, 1);
-                    DateTime firstNeededDayOfWeek = firstDayOfMonth.AddDays((Day - firstDayOfMonth.DayOfWeek + 7) % 7);
+                    DateTime firstNeededDayOfWeek = firstDayOfMonth.AddDays(((DayOfWeek)Day - firstDayOfMonth.DayOfWeek + 7) % 7);
 
                     if (firstNeededDayOfWeek.Month < firstDayOfMonth.Month)
                         firstNeededDayOfWeek = firstNeededDayOfWeek.AddDays(7);
@@ -41,7 +41,7 @@ namespace Toucan.Youcan.Models.Options
                     if (exactDayOfMonth <= end)
                         result.Add(exactDayOfMonth);
 
-                    temp = temp.AddMonths(1);
+                    temp = temp.AddMonths(Frequency);
                 }
             }
             else
@@ -49,9 +49,14 @@ namespace Toucan.Youcan.Models.Options
                 while (temp <= end)
                 {
                     if (temp.Day == DayNumber)
+                    {
                         result.Add(temp);
-
-                    temp = temp.AddDays(1);
+                        temp = temp.AddMonths(Frequency);
+                    }
+                    else
+                    {
+                        temp = temp.AddDays(1);
+                    }
                 }
             }
 

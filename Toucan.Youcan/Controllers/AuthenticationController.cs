@@ -35,7 +35,7 @@ namespace Toucan.Youcan.Controllers
             }
         }
 
-        [HttpGet("signin/{login}/{hashedPassword}")]
+        [HttpGet("signup/{login}/{hashedPassword}")]
         public string SignUp(/*SignInDTO user*/string login, string hashedPassword)
         {
             var user = new SignDTO(login, hashedPassword);

@@ -30,14 +30,24 @@ namespace Toucan.Youcan.Services
             return string.Join(", ", option.GetAllDays(start, end));
         }
 
-        public string testMonths(DateTime startDate, int frequency, DateTime start, DateTime end, HashSet<DayOfWeek> days)
+        public string testMonths(DateTime startDate, int frequency, DateTime start, DateTime end, int? dayNumber, DayOfWeek? day, int? weekFrequency, bool isExtendedMode)
         {
-            var option = new OptionsWeek();
+            var option = new OptionsMonth();
 
             option.StartDate = startDate;
             option.EndDate = startDate.AddYears(2);
             option.Frequency = frequency;
-            option.Days = days;
+            option.IsExtendedMode = isExtendedMode;
+
+            if (isExtendedMode)
+            {
+                option.Day = day;
+                option.WeekFrequency = (int)weekFrequency;
+            }
+            else
+            {
+                option.DayNumber = dayNumber;
+            }
 
             return string.Join(", ", option.GetAllDays(start, end));
         }
