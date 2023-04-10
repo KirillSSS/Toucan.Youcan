@@ -54,36 +54,38 @@ namespace Toucan.Youcan.Controllers
             }
         }
 
-
-
-        //POSHEL NAHER!)
-
-        [HttpGet("test")]
-        public string Test(Some model)
-        {
-            return "hello world";
-        }
-
-        public class Some
-        {
-            public int Email { get; set; }
-            public int Password { get; set; }
-        }
-
         [HttpGet("signUp")]
-        public string SignUp(/*SignInDTO user*/string login, string hashedPassword)
+        public string SignUp(string email, string password)
         {
-            var user = new SignDTO(login, hashedPassword);
-
+            var user = new SignInDTO();
+            user.email = email;
+            user.password = password;
             try
             {
-                return _authenticationService.SignIn(user) + "";
+                return JsonSerializer.Serialize(_authenticationService.SignUpNew(user));
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                var ret = new SignOutDTO();
+                ret.message = ex.Message;
+                return JsonSerializer.Serialize(ret);
             }
         }
+
+        //[HttpGet("signUp")]
+        //public string SignUp(/*SignInDTO user*/string login, string hashedPassword)
+        //{
+        //    var user = new SignDTO(login, hashedPassword);
+
+        //    try
+        //    {
+        //        return _authenticationService.SignIn(user) + "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex.Message;
+        //    }
+        //}
     }
 }
 

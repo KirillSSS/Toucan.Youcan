@@ -13,5 +13,7 @@ namespace Toucan.Youcan.Data.Abstraction
         public void Remove(Users user);
         //-----------------------------------------
         public void Update(Users user);
+        //-----------------------------------------
+        public int SaveChanges();
     }
 }

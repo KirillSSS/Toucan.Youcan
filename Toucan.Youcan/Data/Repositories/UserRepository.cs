@@ -41,5 +41,10 @@ namespace Toucan.Youcan.Data.Repositories
         {
             _context.Set<Users>().Update(user);
         }
+        //-----------------------------------------
+        public int SaveChanges()
+        {
+            return _context.SaveChanges();
+        }
     }
 }

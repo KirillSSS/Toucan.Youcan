@@ -10,5 +10,6 @@ namespace Toucan.Youcan.Services.Abstractions
         public int SignUp(SignDTO user);
 
         public SignOutDTO SignInNew(SignInDTO user);
+        public SignOutDTO SignUpNew(SignInDTO user);
     }
 }

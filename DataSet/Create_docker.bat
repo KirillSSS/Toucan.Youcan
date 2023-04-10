@@ -1,0 +1,1 @@
+docker run --name scheduler -p 5602:5432 -e POSTGRES_PASSWORD=justsomepassword -d postgres:12

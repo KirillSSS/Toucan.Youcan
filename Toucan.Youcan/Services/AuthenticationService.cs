@@ -46,6 +46,39 @@ namespace Toucan.Youcan.Services
                 return signOut;
             }
         }
+        public SignOutDTO SignUpNew(SignInDTO user)
+        {
+            var userOut = _userRepository.GetByMail(user.email);
+            var signOut = new SignOutDTO();
+            if (userOut == null)
+            {
+                var userNew = new Users();
+                userNew.mail = user.email;
+                userNew.password = user.password;
+                //var id = new Random().Next(1, 1000000);
+                //while (true)
+                //{
+                //    var t = _userRepository.Get(id);
+                //    if (t == null)
+                //        break;
+                //    id = new Random().Next(1, 1000000);                    
+                //}
+                //userNew.id = id;
+                var id = _userRepository.Add(userNew);
+                _userRepository.SaveChanges();
+                signOut.message = "Success";
+                signOut.user = new UserDTO();
+                signOut.user.email = user.email;
+                signOut.user.id = _userRepository.GetByMail(user.email).id.ToString();
+                return signOut;
+            }
+            else
+            {
+
+                signOut.message = "Exist User";
+                return signOut;
+            }
+        }
 
         public int SignUp(SignDTO user)
         {
